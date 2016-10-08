@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Hola Mundo!
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+ 	<h2>{{message}}</h2>
+
+  <ion-item>
+    <ion-label primary stacked>Título</ion-label>
+    <ion-input type="text" placeholder="Título de la misión" [(ngModel)]="newQuest.title"></ion-input>
+  </ion-item>
+  <ion-item>
+     <ion-label primary stacked>Descripción</ion-label>
+    <ion-textarea type="text" placeholder="Descripción" [(ngModel)]="newQuest.description"></ion-textarea>
+  </ion-item>
+
+ <ion-item>
+  <button (click)="addMision(newQuest)">
+    <ion-icon name="chatbubbles"></ion-icon>
+    Añadir misión
+  </button>
+ </ion-item>
+
+  <ion-card *ngFor="let quest of quests" >
+		<ion-card-content>
+			<ion-card-title (click)="goToDetails(quest)">
+				{{quest.title}}
+			</ion-card-title>
+			<p>
+				{{quest.description}}
+			</p>
+      <ion-col>
+        <button primary clear small (click)="completedQuest(quest)" item-left>
+          <ion-icon name="checkmark"></ion-icon>
+          <div>Completado!</div> 
+        </button>
+        <button secondary outline small  color="danger" (click)="removeQuest(quest)" item-rigth>
+          <ion-icon name="trash"></ion-icon>
+          <div>Eliminar!</div> 
+        </button>
+      </ion-col>
+		</ion-card-content>
+	</ion-card>
+  
+  <ion-item *ngIf="quests.length == 0">
+    <label color="danger" small>No tiene misiones importantes</label>
+  </ion-item>
+
+</ion-content>
